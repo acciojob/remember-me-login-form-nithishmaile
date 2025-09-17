@@ -1,16 +1,80 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login-Form</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
+            height:100vh;
+            width:100vw;
+            margin:0px;
+            padding: 0px;
+        }
+        #container{
+            display: flex;
+            flex-direction:column;
+            align-items: center;
+            height:50vh;
+            width:100vw;
+        }
+        input{
+            margin: 10px 0px;
+            padding: 8px;
+        }
+        .hide{
+            display:none;
+        }
+    </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <div id="container">
+        <h1>Login Form</h1>
+        <form id="form-container" onsubmit="onClickSubmit(event)">
+            <input type="text" id="username" placeholder="Username" />
+            <br/>
+            <input type="password" id="password" placeholder="Password" />
+            <br/>
+            <input type="checkbox" id="checkbox"/>
+            <label for="checkbox">Remember me.</label>
+            <br/>
+            <input type="submit" id="submit" value="Submit"/>
+        </form>
+        <button type="button" id="existing">Login as existing user</button>
+    </div>
+    <script>
+        const formContainer=document.getElementById("form-container");
+        const existingUserButton=document.getElementById("existing");
+        if(localStorage.getItem("name")){
+            formContainer.classList.add("hide");
+            existingUserButton.classList.remove("hide")
+        }else{
 
+            existingUserButton.classList.add("hide")
+            formContainer.classList.remove("hide")
+        }
+        function onClickSubmit(event){
+            event.preventDefault()
+            alert(`Logged in as ${event.target[0].value}`)
+            if(event.target[2].checked==true){
+                localStorage.setItem("name",event.target[0].value)
+                localStorage.setItem("password",event.target[1].value)
+            }else{
+                localStorage.removeItem("name");
+                localStorage.removeItem("password")
+            }
+            event.target.reset()
+        }
+
+        existingUserButton.addEventListener("click",onClickExistingUserButton);
+        function onClickExistingUserButton(){
+            alert(`Logged in as ${localStorage.getItem("name")}`);
+
+        }
+    </script>
 </body>
-
 </html>
