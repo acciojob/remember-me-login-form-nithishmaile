@@ -53,7 +53,7 @@
     <script>
         const formContainer=document.getElementById("form-container");
         const existingUserButton=document.getElementById("existing");
-        if(localStorage.getItem("name")){
+        if(localStorage.getItem("username")){
             formContainer.classList.add("hide");
             existingUserButton.classList.remove("hide")
         }else{
@@ -65,10 +65,10 @@
             event.preventDefault()
             alert(`Logged in as ${event.target[0].value}`)
             if(event.target[2].checked==true){
-                localStorage.setItem("name",event.target[0].value)
+                localStorage.setItem("username",event.target[0].value)
                 localStorage.setItem("password",event.target[1].value)
             }else{
-                localStorage.removeItem("name");
+                localStorage.removeItem("username");
                 localStorage.removeItem("password")
             }
             event.target.reset()
@@ -76,7 +76,7 @@
 
         existingUserButton.addEventListener("click",onClickExistingUserButton);
         function onClickExistingUserButton(){
-            alert(`Logged in as ${localStorage.getItem("name")}`);
+            alert(`Logged in as ${localStorage.getItem("username")}`);
 
         }
     </script>
